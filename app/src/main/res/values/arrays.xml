@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="catgs">
+        <item>@string/cat1</item>
+        <item>@string/cat2</item>
+        <item>@string/cat3</item>
+        <item>@string/cat4</item>
+        <item>@string/cat5</item>
+        <item>@string/cat6</item>
+        <item>@string/cat7</item>
+        <item>@string/cat8</item>
+        <item>@string/cat9</item>
+        <item>@string/cat10</item>
+        <item>@string/cat11</item>
+        <item>@string/cat12</item>
+        <item>@string/cat13</item>
+        <item>@string/cat14</item>
+    </string-array>
+    <integer-array name="drawimage">
+        <item>@drawable/spotlight</item>
+        <item>@drawable/mainghumantu</item>
+        <item>@drawable/khabarkhajana</item>
+        <item>@drawable/techroobaru</item>
+        <item>@drawable/youngindiaspeaks</item>
+        <item>@drawable/kitchenwindow</item>
+        <item>@drawable/expertstalk</item>
+        <item>@drawable/health</item>
+        <item>@drawable/dailydose</item>
+        <item>@drawable/kids_section</item>
+        <item>@drawable/readerscolumn</item>
+        <item>@drawable/writeandwin</item>
+        <item>@drawable/kahaniyan</item>
+        <item>@drawable/kavitaen</item>
+    </integer-array>
+
+</resources>

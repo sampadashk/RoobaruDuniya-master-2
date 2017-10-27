@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/approved"
+        android:title="@string/approved"
+        app:showAsAction="always"
+
+        android:enabled="true"
+        android:text="@string/approve" />
+
+
+    <item
+        android:id="@+id/reject"
+        android:title="@string/reject"
+        app:showAsAction="always"
+        android:text="@string/reject"
+        android:enabled="true" />
+    <item
+        android:title="@string/save"
+        android:id="@+id/saveEditor"
+        android:text="@string/save"
+        app:showAsAction="always"
+        android:enabled="false" />
+</menu>

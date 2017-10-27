@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/delete_draft"
+        android:title="@string/delete"
+        app:showAsAction="always"
+
+        android:enabled="false"
+        android:text="@string/delete" />
+
+    <item
+        android:id="@+id/savecl"
+        android:title="@string/savenclose"
+        app:showAsAction="always"
+
+        android:enabled="false"
+        android:text="@string/savenclose" />
+
+
+    <item
+        android:id="@+id/draft"
+        android:title="@string/draft"
+        app:showAsAction="always"
+        android:text="@string/draft"
+        android:enabled="false" />
+    <item
+        android:title="@string/publish"
+        android:id="@+id/publish"
+        android:text="@string/publish"
+        app:showAsAction="always"
+        android:enabled="false" />
+</menu>

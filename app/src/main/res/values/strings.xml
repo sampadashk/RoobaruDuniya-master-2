@@ -1,0 +1,206 @@
+<resources>
+    <string name="app_name">RoobaruDuniya</string>
+    <string name="roobaru">Roobaru Duniya</string>
+    <string name="post_title_hint">Give your post a title</string>
+    <string name="post_body_hint">Type something here…</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="openDrawer">open_drawer</string>
+    <string name="closeDrawer">close_drawer</string>
+    <string name="URL">URL</string>
+    <string name="URL_Text">Link Text(Optional)</string>
+
+    <!-- Navigation Drawer menu labels -->
+    <string name="nav_home">Home</string>
+    <string name="nav_fav">Favorites</string>
+    <string name="nav_drafts">drafts</string>
+
+
+    <string name="nav_published">published</string>
+    <string name="nav_sent">Article Sent for publication</string>
+    <string name="nav_about_us">About Us</string>
+    <string name="article_unpublished">Unpublished Articles</string>
+
+
+    <!-- Toolbar titles when navigation menu item is selected -->
+    <string-array name="nav_item_activity_titles">
+        <item>Roobaru Duniya</item>
+        <item>BookMarked</item>
+        <item>My drafts</item>
+        <item>My Published Articles</item>
+        <item>My Aricles sent for Publication</item>
+
+    </string-array>
+
+    <string name="activity_title_about_us">About Us</string>
+    <string name="activity_title_privacy_policy">Privacy Policy</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="title_activity_trial">TrialActivity</string>
+    <string name="error_no_network">No network connectivity! Will load articles when the network is available.</string>
+
+    <string name="published_caption">Published Articles</string>
+    <string name="no_published">NO Published Article</string>
+    <string name="bold">B</string>
+    <string name="italic">I</string>
+    <string name="writer_detail">W</string>
+    <string name="signed_in">Signed in!</string>
+    <string name="signed_out">Signed Out!</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="no_connectivity">No Connectivity</string>
+    <string name="search_title">search by title</string>
+    <string name="search_author">search by author</string>
+
+    <string name="select_font">Select The Font Size</string>
+
+    <string name="aboutus">\'रूबरू\' उर्दू भाषा का एक ऐसा शब्द जिससे हिंदी में कई शब्द जुड़े हैं, जैसे \'जानना\', \'अवगत होना\', \'पहचानना \',
+\'अहसास होना\' आदि, मौखिक रूप से इसका मतलब है कि अपने आस पास की चीजों को जानना, जिनके बारे
+में हमे या तो पता नहीं होता, और पता होता भी है तो कुछ पूरी-अधूरी सी जानकारी के साथ. इसलिए रूबरू
+दुनिया का ख़याल हमारे ज़ेहन में आया क्योंकि हम एक ऐसी पत्रिका लोगों तक पहुँचाना चाहते हैं जो
+फिल्मजगत, राजनीति या खेल से हटकर असल भारत और अपने भारत से हमे रूबरू करा सके.\n\n
+
+जो युवाओं के मनोरंजन के साथ-साथ बुजुर्गों का ज्ञान भी बाटें, जो
+महिलाओं की महत्ता के साथ-साथ पुरुषों का सम्मान भी स्वीकारे, जो बच्चों
+को सीख दे और बड़ों को नए ज़माने को अपनाने के तरीक बताये, जो धर्म जाती
+व परम्पराओं के साथ-साथ विज्ञान की ऊँचाइयों से अवगत कराये और विज्ञान
+किस हद तक हमारी अपनी भारतीय संस्कृति से जुड़ा है ये भी बताये, जो छोटे
+से अनोखे गावों की कहानियां सुनाये और जो तेज़ी से बदलते शहरों की
+रफ़्तार बताये, जो शर्म हया से लेकर रोमांस महसूस कराये और जो हमें अपनी
+आधुनिक भारतीय संस्कृति से मिलाये |\n\n
+
+सिर्फ इतना ही नहीं इस मासिक पत्रिका के मुख्य तीन उद्देश्य युवाओं को
+हिंदी और समाज से जोड़े रखना, समाज में व्याप्त बुराइयों को मिटाने के लिए
+जागरूकता फैलाने और उन्हें दूर करने में युवाओं की भूमिका को बनाये रखना,
+और नए लेखकों को एक प्लेटफार्म देना के अलावा हिंदी साहित्य को संग्रहित
+व् सुरक्षित करने के साथ साथ एक ऊँचाई देना भी है |\n\n
+
+रूबरू के प्रिंट रूप का प्रकाशन सितम्बर 2012 से मार्च 2015 तक सफल रूप से हुआ. अपने इस काल में
+रूबरू ने देश 30 शहरों और विदेशों में भी ऑनलाइन पाठकों के दिल में जगह बनाई. फिर किन्ही कारणों से
+रूबरू का प्रिंट प्रकाशन बंद हुआ. और अब हम वापस लौटे हैं रूबरू की एप के साथ. उसी उम्मीद और जज़्बे
+के साथ. आशा है हमें फिर पाठकों और लेखकों का साथ मिलेगा और कारवां बढ़ता जाएगा.\n\n
+        पत्रिका के प्रिंट रूप का पंजीयन भारत के समाचारपत्रों के पंजीयन कार्यालय (The Registrar of Newspapers
+for India, Govt of India) द्वारा 2012 में हुआ था. जिसका पंजीयन नंबर MPHIN/2012/45819 है.\n\n
+
+इस पत्रिका की मुख्य संपादक व प्रकाशक अंकिता जैन हैं |</string>
+    <string name="facebook_application_id">1948414998767993</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">fb1948414998767993</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="editor_unpublished">UnPublished Articles</string>
+    <string name="username">Enter Writer name</string>
+    <string name="category_image">Category Image</string>
+    <string name="user_profile">User profile Pic</string>
+    <string name="widget_launcher">Widget Launcher</string>
+    <string name="italic_button">Italic Button</string>
+    <string name="choose_article_image">Choose Article Image</string>
+    <string name="default_status">Blogger</string>
+    <string name="comments">Comment</string>
+    <string name="hint_write_comment">Write Comments</string>
+    <string name="default_notificationNum">0</string>
+    <string name="write_blog">write_blog</string>
+    <string name="notification">notification</string>
+
+    <string name="Share">Share</string>
+    <string name="approved">approved</string>
+    <string name="approve">approve</string>
+    <string name="reject">reject</string>
+    <string name="save">Save</string>
+    <string name="delete">delete</string>
+    <string name="delete_comment">Comment Deleted</string>
+    <string name="draft_saved">Draft Saved</string>
+    <string name="send_approval">Article sent!will be published once it gets approved by editor</string>
+    <string name="wait_photo">Please wait!Photo uploading to server</string>
+    <string name="word_limit_msg">Please write altleast 200 words to publish</string>
+    <string name="article_title_msg">Please give your article a title</string>
+    <string name="photo_uploaded">Photo uploaded</string>
+    <string name="draft">draft</string>
+    <string name="publish">publish</string>
+    <string name="editor">Editor</string>
+    <string name="like">like</string>
+    <string name="manual">रूबरू दुनिया में लिखना चाहते हैं? तो पहले यह मैन्युअल ध्यान से पढ़ लें. हमने आपकी
+सहायता के लिए इसे तैयार किया है.\n
+1) पोस्ट का टाइटल हिंदी में ही लिखें.\n
+2) पोस्ट में शब्दों की मिनिमम संख्या 200 है. जब तक आपके 200 शब्द नहीं होते आपकी पोस्ट
+प्रकाशित नहीं होगी.\n
+3) लिखने के बाद यदि आपको लगता है कि अभी आपको उसमें कुछ और लिखना बाक़ी है तो आप
+“DRAFT” पर क्लिक करने के बाद “SAVE&amp;CLOSE” का आप्शन चुन सकते हैं. इससे आपकी यह
+पोस्ट ड्राफ्ट में जाकर सेव हो जाएगी जिसे आप मेन मेनू में जाकर वापस खोल सकते हैं.\n
+4) यदि आपने पोस्ट को ड्राफ्ट से ओपन किया है तो आप ऊपर मेनू में किसी भी आप्शन पर तब तक
+क्लिक नहीं कर पाएँगे जब तक आप अपने ड्राफ्ट में कुछ एडिट नहीं करते.\n
+5) नीचे मेनू में आपको फोटो, बोल्ड, इटैलिक और बुल्लेट्स की सुविधा दी गई है.\n
+6) आपके द्वारा लिखी पोस्ट पहले हमारे एडिटर्स के पास जाती है. वे अपने स्तर पर इसकी जाँच करते
+हैं. यदि उन्हें आपकी पोस्ट में कोई भी कॉपी राईट इशू या विवादस्पद कंटेंट लगा तो वे इसे रिजेक्ट
+कर सकते हैं. अन्यथा आपकी पोस्ट प्रकाशित हो जाएगी.\n
+7) जाँच, परखें, पढ़े, फिर खूब लिखें. जुड़ने के लिए धन्यवाद.</string>
+    <string name="privacy">यह प्राइवेसी पालिसी रूबरू दुनिया में प्रकाशित कंटेंट, पाठकों एवं लेखकों से सम्बंधित है.\n\n
+ रूबरू दुनिया में प्रकाशित होने वाला कंटेंट इस बात को ध्यान में रखते हुए प्रकाशित किया जाता
+है कि इससे किसी भी तरह की कोई विवादास्पद घटना का जन्म न हो. और यदि किन्ही
+कारणों से रूबरू में प्रकाशित किसी लेख से कोई भी विवादस्पद घटना उत्पन्न होती है तो उसके
+लिए पूर्णतः लेखक ज़िम्मेदार होगा.\n\n
+रूबरू दुनिया में प्रकाशित कंटेंट पर यदि कोई भी व्यक्ति कॉपी राईट का क्लेम करता है तो
+उसका ज़िम्मेदार लेखक होगा, व ऐसी स्थिति में रूबरू तुरन्त उस लेखक द्वारा लिखी सभी
+सामग्री को अपनी एप्लीकेशन से हटा देगा व लेखक को आगे के लिए ब्लॉक कर देगा.\n
+रूबरू दुनिया में जब भी कोई पाठक लॉग इन करता है तो उनके द्वारा सीधे प्रदत्त या फेसबुक
+लॉग इन द्वारा वहां से प्राप्त इनफार्मेशन रूबरू दुनिया द्वारा कभी भी लीक नहीं की जावेगी.
+यदि किसी भी पाठक या लेखक को यह शिकायत है कि रूबरू दुनिया से पठाक की किसी भी
+तरह कि कोई इनफार्मेशन लीक हुई है तो वे तुरन्त हमें <b><u>roobaru.duniya@gmail.com</u></b> पर मेल
+भेज सकते हैं.\n\n
+आए दिन बदलती दुनिया में नित नए बदलावों के कारण समय-समय पर हमें भी अपने नियम
+बदलने पड़ सकते हैं अतः एप्लीकेशन के उपभोक्ताओं से निवेदन है कि वे भी समय-समय पर
+यहाँ आकर नियमों की जाँच करते रहें.\n\n
+धन्यवाद\n \n
+रूबरू दुनिया</string>
+
+
+
+    <string name="search">search</string>
+    <string name="send">SEND</string>
+    <string name="other">other</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="no_photo">No Photo Alert</string>
+    <string name="unknown_error">Unknown error</string>
+    <string name="no_data">No data</string>
+    <string name="small">small</string>
+    <string name="medium">Medium</string>
+    <string name="large">Large</string>
+    <string name="select_wphoto">Select Writer Photo</string>
+    <string name="writer_profile">Writer Profile Pic</string>
+    <string name="article_image">Article Image</string>
+    <string name="cancel_comment">cancel comment</string>
+    <string name="commentor_profile">Commentor Profile Picture</string>
+    <string name="toast_no_connectivity">No network</string>
+    <string name="wait_msg">Please wait!</string>
+    <string name="bookmark_saved">Bookmarked</string>
+    <string name="bookmark_removed">Bookmark Removed</string>
+    <string name="savenclose">Save&amp;Close</string>
+    <string name="nav_bookmark">Bookmarked</string>
+    <string name="filter_view_http_gizmos">test_link</string>
+    <string name="cat1">रूबरू स्पॉटलाइट</string>
+    <string name="cat2">मैं घुमंतू</string>
+    <string name="cat3">ख़बर खजाना</string>
+    <string name="cat4">Tech रूबरू</string>
+    <string name="cat5">यंग इंडिया स्पीक्स</string>
+    <string name="cat6">किचन विंडो</string>
+    <string name="cat7">एक्सपर्ट्स टॉक</string>
+    <string name="cat8">हेल्थ-वेल्थ</string>
+    <string name="cat9">डेली-डोज़</string>
+    <string name="cat10">बच्चों के लिए</string>
+    <string name="cat11">मेरा ब्लॉग</string>
+    <string name="cat12">राइट एंड विन</string>
+    <string name="cat13">कहानियाँ</string>
+    <string name="cat14">कविताएँ</string>
+
+    <string name="category_prompt">Select Category</string>
+    <string name="search_hint">Enter Article Title or Author Name</string>
+    <string name="no_result">No Result Found</string>
+    <string name="no_profile">No Profile Found</string>
+    <string name="contact_us">contact us</string>
+    <string name="like_button">like Button</string>
+    <string name="go_home">Go to home Screen</string>
+    <string name="bookmark_button">bookmark article</string>
+    <string name="share_button">share article</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+
+
+</resources>

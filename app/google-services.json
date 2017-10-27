@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "1051097820539",
+    "firebase_url": "https://roobaru-duniya-86f7d.firebaseio.com",
+    "project_id": "roobaru-duniya-86f7d",
+    "storage_bucket": "roobaru-duniya-86f7d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1051097820539:android:59fb6a5b399325fe",
+        "android_client_info": {
+          "package_name": "com.samiapps.kv.roobaruduniya"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1051097820539-ejirrq73aq98sp8lrt6lqtu10c33fdid.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.samiapps.kv.roobaruduniya",
+            "certificate_hash": "af4f67acb141df10d2e61e82c0e908a61c3c6783"
+          }
+        },
+        {
+          "client_id": "1051097820539-ct7dbt4tth4nd5r3e22lho45ub454u8m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.samiapps.kv.roobaruduniya",
+            "certificate_hash": "dbf47138fbdb699b8766b3ee8a6d18f6e086d8e7"
+          }
+        },
+        {
+          "client_id": "1051097820539-jgol9rgko5si7kg1pl1fdbmk62dmhbkt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnufnnY5h1we80emCzhrHv5bZdTdFqtbw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1051097820539-jgol9rgko5si7kg1pl1fdbmk62dmhbkt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

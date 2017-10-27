@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img_profile"
+            android:layout_width="@dimen/profile_width"
+            android:layout_height="50dp"
+            android:contentDescription="@string/commentor_profile"
+
+            app:srcCompat="@android:drawable/sym_def_app_icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_toRightOf="@id/img_profile"
+            android:paddingTop="5dp"
+            android:textStyle="bold"
+            android:textSize="12dp"
+            android:clickable="true"
+            android:autoLink="web"
+
+            android:id="@+id/uc_name" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cmt_data"
+
+            android:textSize="12dp"
+            android:layout_toRightOf="@id/img_profile"
+            android:layout_below="@id/uc_name" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+
+            android:layout_below="@id/cmt_data"
+            android:layout_toRightOf="@id/img_profile"
+            android:id="@+id/uc_comment" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/delete_button"
+            android:contentDescription="@string/cancel_comment"
+            android:background="@android:drawable/ic_delete"
+            android:layout_alignParentRight="true"
+            android:visibility="gone"
+
+            />
+
+        <ProgressBar
+            android:layout_height="42dp"
+            android:layout_width="42dp"
+            android:layout_gravity="center"
+            android:visibility="invisible"
+
+            />
+
+
+    </RelativeLayout>
+    <!--
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal">
+
+
+
+       <View
+           android:layout_width="0dp"
+           android:layout_height="0dp"
+           android:layout_weight="1"
+           />
+       <ImageButton
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:id="@+id/delete_button"
+           android:background="@android:drawable/ic_delete"
+           android:visibility="gone"
+
+
+
+           />
+   </LinearLayout>
+   -->
+
+
+</LinearLayout>

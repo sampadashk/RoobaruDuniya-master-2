@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:id="@+id/latest_img"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/scrim" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/latest_img"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:text="Latest Articles"/>
+            <ImageButton
+                android:id="@+id/left_nav"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_keyboard_arrow_left_white_24dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/latest_img"
+
+                android:layout_alignRight="@+id/latest_img"
+                android:layout_alignBottom="@+id/latest_img"
+                android:layout_margin="1dp"
+                android:gravity="center"
+
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:id="@+id/latest_title"/>
+
+
+            <ImageButton
+                android:id="@+id/right_nav"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_keyboard_arrow_right_white_24dp"
+                />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+
+
+</LinearLayout>
