@@ -28,12 +28,7 @@
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
                 android:text="Latest Articles"/>
-            <ImageButton
-                android:id="@+id/left_nav"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_keyboard_arrow_left_white_24dp" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -50,14 +45,7 @@
                 android:id="@+id/latest_title"/>
 
 
-            <ImageButton
-                android:id="@+id/right_nav"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/ic_keyboard_arrow_right_white_24dp"
-                />
+
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 

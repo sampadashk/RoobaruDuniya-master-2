@@ -35,18 +35,11 @@ public class LatestAdapter extends RecyclerView.Adapter<LatestAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(  LatestAdapter.ViewHolder holder, int position) {
-
-
-
+    public void onBindViewHolder( LatestAdapter.ViewHolder holder, int position) {
         RoobaruDuniya  latest = latestArticles.get(position);
-
         holder.latestTitl.setText(latest.getTitle());
-        String image = latest.getPhoto();
-
+        String image=latest.getPhoto();
         if (image != null) {
-
-
             Glide.with(ct)
                     .load(image)
                     .into(holder.vlatest);
@@ -81,9 +74,7 @@ public class LatestAdapter extends RecyclerView.Adapter<LatestAdapter.ViewHolder
             super(itemView);
             latestTitl=(TextView)itemView.findViewById(R.id.latest_title);
             vlatest=(ImageView)itemView.findViewById(R.id.latest_img);
-            leftNav = (ImageButton) itemView.findViewById(R.id.left_nav);
-            rightNav = (ImageButton) itemView.findViewById(R.id.right_nav);
-            rightNav.setOnClickListener(this);
+
             itemView.setOnClickListener(this);
         }
 

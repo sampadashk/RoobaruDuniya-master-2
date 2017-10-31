@@ -59,9 +59,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
       //  Log.d("JSON_OBJECT", object.toString());
 
 
-        int countNo = TrialActivity.mNotifCount;
-        countNo += 1;
-        setBadge(getApplicationContext(), countNo, notification_body, object);
+
+        //setBadge(getApplicationContext(), countNo, notification_body, object);
 
 
         NotificationCompat.Builder mBuilder =

@@ -9,8 +9,8 @@ android {
         applicationId "com.samiapps.kv.roobaruduniya"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 33
-        versionName "15.00"
+        versionCode 35
+        versionName "17.00"
         multiDexEnabled true
 
 

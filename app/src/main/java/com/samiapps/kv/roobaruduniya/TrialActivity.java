@@ -24,7 +24,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,20 +41,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class TrialActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, SearchView.OnQueryTextListener {
     private FirebaseAuth mAuth;
-    static Button notifCount;
-    static int mNotifCount = 0;
-    String notificationMessage;
-    ArrayList<Notification> notificationArrList;
-    ArrayList<NotificationJson> notificationJsonList;
+
+
+
 
     private static String LAST_OPENED_FRAGMENT_REF;
 
@@ -159,8 +154,7 @@ public class TrialActivity extends AppCompatActivity
         dbEditor = firebaseDtabase.getReference("editor");
         userDtabase = firebaseDtabase.getReference("user");
         // mAuth.addAuthStateListener(mAuthListener);
-        notificationArrList = new ArrayList<>();
-        notificationJsonList = new ArrayList<>();
+
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -201,42 +195,13 @@ public class TrialActivity extends AppCompatActivity
 
 
         //registering broadcast receiver
-        IntentFilter intentFilter = new IntentFilter(
-                "android.intent.action.BADGE_COUNT_UPDATE");
 
-        mReceiver = new BroadcastReceiver() {
 
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                //extract our message from intent
-                notificationMessage = intent.getStringExtra("badge_count_msg");
-                try {
-                    json_object = new JSONObject(intent.getExtras().getString("badge_jsondata"));
-                    NotificationJson notificationJson = new NotificationJson(json_object.get("msgid").toString(), json_object.get("userid").toString());
-                    //Log.d("ckjsonob", json_object.get("msgid").toString());
-                    //Log.d("ckjsonobdev", json_object.get("userid").toString());
-                    notificationJsonList.add(notificationJson);
 
-                    Notification n = new Notification(notificationMessage);
-                    //Log.d("getmsg", n.getMessage());
-                    notificationArrList.add(n);
 
-                    //Log.d("chknsize", "" + notificationArrList);
-                    int count = intent.getIntExtra("badge_count", 0);
-                    //log our message value
-                    //Log.d("checknotifcount", "" + count);
-                    setNotifCount(count);
-                } catch (NullPointerException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        };
         registerReceiver(ConnectivityReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
         //registering our receiver
-        this.registerReceiver(mReceiver, intentFilter);
+
 
 
     }
@@ -346,39 +311,7 @@ public class TrialActivity extends AppCompatActivity
         inflater.inflate(R.menu.main, menu);
 
 
-        View count = menu.findItem(R.id.badge).getActionView();
-        notifCount = (Button) count.findViewById(R.id.notif_count);
-        notifCount.setText(String.valueOf(mNotifCount));
 
-
-        notifCount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    //Log.d("ckjs", json_object.get("userid").toString());
-
-
-                    setNotifCount(0);
-                    Intent intent1 = new Intent(getApplicationContext(), NotificationList.class);
-                    intent1.putExtra("msgNotification", notificationMessage);
-                    // Bundle args=new Bundle();
-                    //args.putSerializable("ARRAYLIST",(Serializable)notificationArrList);
-                    intent1.putExtra("passObject", notificationArrList);
-                    intent1.putExtra("passdataObject", notificationJsonList);
-                    intent1.putExtra("jsondetail", json_object.toString());
-
-
-                    startActivity(intent1);
-                } catch (NullPointerException ne) {
-                    ne.printStackTrace();
-                }
-
-                notificationArrList.clear();
-                notificationJsonList.clear();
-
-
-            }
-        });
 
 
         //  View count = menu.findItem(R.id.badge).getActionView();
@@ -388,10 +321,7 @@ public class TrialActivity extends AppCompatActivity
 
     }
 
-    public void setNotifCount(int count) {
-        mNotifCount = count;
-        invalidateOptionsMenu();
-    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

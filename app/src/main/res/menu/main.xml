@@ -14,17 +14,10 @@
     <item
         android:id="@+id/write_blog"
         android:title="@string/write_blog"
+
         app:showAsAction="collapseActionView|ifRoom"
         android:icon="@drawable/ic_action_border_color" />
-    <item
-        android:id="@+id/badge"
-        app:actionLayout="@layout/feed_update_count"
-        android:icon="@drawable/shape_notification"
-        android:title="@string/notification"
-        android:enabled="true"
 
-
-        app:showAsAction="always"></item>
 
 
     <!-- Settings, should always be in the overflow -->

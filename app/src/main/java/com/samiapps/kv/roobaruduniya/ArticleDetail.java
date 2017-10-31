@@ -455,18 +455,8 @@ public class ArticleDetail extends AppCompatActivity {
                 LoadUIFromkey(keySel);
 
 
-            } else if (intent.getStringExtra("intentNotification") != null) {
-                NotificationJson obj = (NotificationJson) intent.getSerializableExtra("NotificationObject");
-                //  Log.d("intentchk", "notification");
-                keySel = obj.getMsg_id();
-                // Log.d("chkrecikey", keySel);
-                // Log.d("chkurl", "https://roobaru-duniya-86f7d.firebaseio.com/messages/" + keySel);
-                LoadUIFromkey(keySel);
 
-
-//                Log.d("titleck", rbd.getTitle());
-
-            } else if (intent.getStringExtra("bkgnotification") != null) {
+            }  else if (intent.getStringExtra("bkgnotification") != null) {
                 JSONObject obj = null;
                 try {
                     obj = new JSONObject(intent.getStringExtra("bkgnotification"));

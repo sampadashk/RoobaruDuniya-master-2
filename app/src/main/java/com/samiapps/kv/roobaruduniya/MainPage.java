@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,6 +28,7 @@ import java.util.ArrayList;
  */
 
 public class MainPage extends Fragment {
+
     RecyclerView mainrecycler;
     ImageView ivLatest;
     TextView tvLatest;
@@ -51,6 +51,7 @@ public class MainPage extends Fragment {
         latestList=new ArrayList<>();
 
 
+
     }
 
     public MainPage() {
@@ -63,7 +64,8 @@ public class MainPage extends Fragment {
         tvLatest=(TextView) rootView.findViewById(R.id.latest_title);
         mainrecycler = (RecyclerView) rootView.findViewById(R.id.main_recycler);
         latestRecyclerView=(RecyclerView) rootView.findViewById(R.id.latest_recycler);
-        dbLatest.limitToLast(5).addValueEventListener(new ValueEventListener() {
+
+        dbLatest.limitToLast(10).addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -92,8 +94,11 @@ public class MainPage extends Fragment {
             al.add(dp);
         }
         latestAdapter=new LatestAdapter(getContext(),latestList);
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,true);
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
+
+
         latestRecyclerView.setLayoutManager(linearLayoutManager);
+
         latestRecyclerView.setAdapter(latestAdapter);
 
         latestAdapter.setOnItemClickListener(new LatestAdapter.LatestListener() {
@@ -145,6 +150,7 @@ public class MainPage extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 RoobaruDuniya rbd = dataSnapshot.getValue(RoobaruDuniya.class);
                 latestList.add(rbd);
+
                 latestAdapter.notifyDataSetChanged();
 
             }
