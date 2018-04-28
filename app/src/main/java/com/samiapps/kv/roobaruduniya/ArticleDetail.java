@@ -114,6 +114,7 @@ public class ArticleDetail extends AppCompatActivity {
     private ShareActionProvider mShareActionProvider;
     private String userId;
     private String wname;
+
     // ArrayList<RoobaruDuniya> rbd;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -122,6 +123,11 @@ public class ArticleDetail extends AppCompatActivity {
 
         setContentView(R.layout.detail_layout);
         Log.d("detailcd", "called");
+       // FacebookSdk.sdkInitialize(getActivity().getApplicationContext());
+
+
+
+
 
 
         commentEditText = (EditText) findViewById(R.id.w_comment);
@@ -448,11 +454,41 @@ public class ArticleDetail extends AppCompatActivity {
             if (data != null) {
                 //   Log.d("uri is",data.toString());
                 String path = data.getPath();
+               // Log.d("checkdata",data.toString());
+                boolean res=path.contains("photo");
+                boolean audiores=path.contains("audio");
+                //Log.d("checkph",res +"");
                 path = path.substring(0, path.length() - 1);
                 String idStr = path.substring(path.lastIndexOf('/') + 1);
+              //  Log.d("getval",idStr);
+                //TODO: PASS PHOTO
+                if(res)
+                {
+                    String val=path.substring(6,path.length());
+                    Intent inten =new Intent(ArticleDetail.this,DisplayPhoto.class);
+                    inten.putExtra("keysend",val);
+                    startActivity(inten);
+                   // Log.d("afterconcat",val);
+                    audiores=false;
+                    finish();
+                }
+                else {
+                    if(audiores)
+                    {
+                        String val=path.substring(6,path.length());
+                        Intent inten =new Intent(ArticleDetail.this,PlayAudioActivity.class);
+                        inten.putExtra("keysend",val);
+                        startActivity(inten);
+                        res=false;
+                       // Log.d("afterconcat",val);
+                        finish();
+                    }
+                    else {
 
-                keySel = idStr;
-                LoadUIFromkey(keySel);
+                        keySel = idStr;
+                        LoadUIFromkey(keySel);
+                    }
+                }
 
 
 
@@ -528,10 +564,7 @@ public class ArticleDetail extends AppCompatActivity {
                     //updating UI when you have article
                     loadUI();
                 }
-                else
-                {
-                    Toast.makeText(ArticleDetail.this,"Article doesnt exist anymore!",Toast.LENGTH_LONG).show();
-                }
+
                 //  Log.d("artchktit", artsel.getTitle());
             }
 
@@ -545,6 +578,7 @@ public class ArticleDetail extends AppCompatActivity {
 
     public void loadUI() {
         if (artsel != null) {
+            Log.d("titleck",artsel.getTitle());
 
             collapsingToolbarLayout.setTitle(artsel.getTitle());
 
@@ -657,8 +691,13 @@ public class ArticleDetail extends AppCompatActivity {
                     .bitmapTransform(new CircleTransform(this))
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(imgProfile);
+            loadComment();
         }
-        loadComment();
+        else
+        {
+            Toast.makeText(ArticleDetail.this,"Article doesnt exist anymore!",Toast.LENGTH_LONG).show();
+        }
+
 
 
     }
@@ -819,7 +858,7 @@ public class ArticleDetail extends AppCompatActivity {
                     try {
                         if (userPhoto == null) {
 
-                            String add = "firebasestorage.googleapis.com/v0/b/roobaru-duniya-86f7d.appspot.com/o/default-profilepic%2Fdefaultprof.jpg?alt=media&token=aeca7a55-05e4-4c02-938f-061624f5c8b4";
+                            String add = "firebasestorage.googleapis.com/v0/b/roobaru-duniya-86f7d.appspot.com/o/defaultpp-profilepic%2Fdefaultprof.jpg?alt=media&token=aeca7a55-05e4-4c02-938f-061624f5c8b4";
                             userPhoto = Uri.parse("https://" + add);
                         }
                     } catch (NullPointerException e) {

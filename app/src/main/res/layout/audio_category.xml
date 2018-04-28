@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ScrollView
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="20dp"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/com_facebook_blue"
+        android:textStyle="bold"
+        android:layout_gravity="center_vertical"
+        android:textSize="18sp"
+
+        android:text="जनहित पर भारी"/>
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/show_audiorecycler"></android.support.v7.widget.RecyclerView>
+</LinearLayout>
+    </ScrollView>
+    <ImageView
+        android:background="#cccccc"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp" />
+    <include layout="@layout/layout_bottom"
+        ></include>
+
+
+</RelativeLayout>

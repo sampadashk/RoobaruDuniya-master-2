@@ -46,6 +46,14 @@ public class User {
     public void setStatus(String status) {
         this.status = status;
     }
+    public User(String name, String email, String status, String uPhoto)
+    {
+        this.name = name;
+        this.email = email;
+
+        this.status = status;
+        this.uPhoto = uPhoto;
+    }
 
     public User(String name, String email, String articleStatus, String status, String uPhoto) {
         this.name = name;

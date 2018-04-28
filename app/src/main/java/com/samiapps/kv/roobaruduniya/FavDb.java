@@ -91,9 +91,13 @@ public class FavDb extends SQLiteOpenHelper {
     public Cursor queryKey(SQLiteDatabase db, String key, String categoryval) {
         String[] projection = {key, categoryval};
         // Cursor c=db.query(RoobaruContract.tableName,projection,"key=?",new String[]{key},null,null,null);
-        Cursor c = db.rawQuery("select * from fav where key=? and category=?", projection);
 
-        return c;
+            Cursor c = db.rawQuery("select * from fav where key=? and category=?", projection);
+
+            return c;
+
+
+
     }
 
 }

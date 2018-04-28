@@ -3,25 +3,24 @@ package com.samiapps.kv.roobaruduniya;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by KV on 12/8/17.
@@ -38,15 +37,20 @@ public class MainPage extends Fragment {
     DatabaseReference dbMessage;
     ArrayList<String> keysLatestList;
     RecyclerView latestRecyclerView;
-    ArrayList<RoobaruDuniya> latestList;
-    LatestAdapter latestAdapter;
+    List<RoobaruList> latestList;
+
+    ValueEventListener latestListener;
+    Button bu;
+    TabLayout tblays;
 
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         fbd=FirebaseDatabase.getInstance();
         dbLatest=fbd.getReference().child("published");
         dbMessage=fbd.getReference().child("messages");
+
         keysLatestList=new ArrayList<>();
         latestList=new ArrayList<>();
 
@@ -62,26 +66,75 @@ public class MainPage extends Fragment {
         View rootView = inflater.inflate(R.layout.main_page, container, false);
         ivLatest=(ImageView) rootView.findViewById(R.id.latest_img);
         tvLatest=(TextView) rootView.findViewById(R.id.latest_title);
+        tblays=(TabLayout) rootView.findViewById(R.id.tabs);
+        tblays.addTab(tblays.newTab().setText("Home"));
+        tblays.addTab(tblays.newTab().setText("Blogs"));
+        tblays.addTab(tblays.newTab().setText("Audio"));
+        tblays.addTab(tblays.newTab().setText("Photos"));
+
         mainrecycler = (RecyclerView) rootView.findViewById(R.id.main_recycler);
-        latestRecyclerView=(RecyclerView) rootView.findViewById(R.id.latest_recycler);
 
-        dbLatest.limitToLast(10).addValueEventListener(new ValueEventListener() {
+        TabLayout.Tab tab = tblays.getTabAt(1);
+        tab.select();
 
+
+        tblays.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                                            @Override
+                                            public void onTabSelected(TabLayout.Tab tab) {
+                                                if (tab.getPosition() == 0) {
+                                                    showAudioActivity fragment2=new showAudioActivity();
+                                                    android.support.v4.app.FragmentManager fragmentManager=getActivity().getSupportFragmentManager();
+                                                    android.support.v4.app.FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+                                                    fragmentTransaction.replace(R.id.frame,fragment2,"home");
+                                                    fragmentTransaction.addToBackStack(null);
+                                                    fragmentTransaction.commit();
+
+
+                                                } else if (tab.getPosition() == 1) {
+
+
+
+                                                }
+                                                else if(tab.getPosition()==2)
+                                                {
+                                                    AudioCategory fragment3=new AudioCategory();
+                                                    android.support.v4.app.FragmentManager fragmentManager=getActivity().getSupportFragmentManager();
+                                                    android.support.v4.app.FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+                                                    fragmentTransaction.replace(R.id.frame,fragment3,"home");
+                                                    fragmentTransaction.addToBackStack(null);
+                                                    fragmentTransaction.commit();
+                                                }
+                                                else
+                                                {
+                                                    PhotoCategory photoCategory=new PhotoCategory();
+                                                    android.support.v4.app.FragmentManager fragmentManager=getActivity().getSupportFragmentManager();
+                                                    android.support.v4.app.FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+                                                    fragmentTransaction.replace(R.id.frame,photoCategory,"home");
+                                                    fragmentTransaction.addToBackStack(null);
+                                                    fragmentTransaction.commit();
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onTabUnselected(TabLayout.Tab tab) {
+
+                                            }
+
+                                            @Override
+                                            public void onTabReselected(TabLayout.Tab tab) {
+
+                                            }
+                                        });
+       /* bu=(Button) rootView.findViewById(R.id.play_audio);
+        bu.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot dp:dataSnapshot.getChildren())
-                {
-                    String key= dp.getKey();
-                    keysLatestList.add(key);
-                    getLatest(key);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
+            public void onClick(View view) {
+                Intent intio=new Intent(getActivity(),PlayAudioActivity.class);
+                startActivity(intio);
             }
         });
+*/
+
         // ArrayList<MainDisplay> al=new ArrayList<>();
         TypedArray imgs = getResources().obtainTypedArray(R.array.drawimage);
         // MainDisplay dp=new MainDisplay(getString(R.string.cat1),getResources().getResourceEntryName(R.drawable.spotlight));
@@ -93,15 +146,9 @@ public class MainPage extends Fragment {
             MainDisplay dp = new MainDisplay((getResources().getStringArray(R.array.catgs)[i]), imgs.getResourceId(i, -1));
             al.add(dp);
         }
-        latestAdapter=new LatestAdapter(getContext(),latestList);
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
 
 
-        latestRecyclerView.setLayoutManager(linearLayoutManager);
-
-        latestRecyclerView.setAdapter(latestAdapter);
-
-        latestAdapter.setOnItemClickListener(new LatestAdapter.LatestListener() {
+      /*  latestAdapter.setOnItemClickListener(new LatestAdapter.LatestListener() {
             @Override
             public void onItemClick(int position, View v) {
 
@@ -120,6 +167,7 @@ public class MainPage extends Fragment {
 
 
         });
+        */
 
         MainAdapter mainAdapter = new MainAdapter(getContext(), al);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
@@ -143,51 +191,15 @@ public class MainPage extends Fragment {
         return rootView;
     }
 
-    private void getLatest(String key) {
-        Log.d("getlatestkey",key);
-        dbMessage.child(key).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                RoobaruDuniya rbd = dataSnapshot.getValue(RoobaruDuniya.class);
-                latestList.add(rbd);
 
-                latestAdapter.notifyDataSetChanged();
-
-            }
-               // String title=rbd.getTitle();
-               // String photo=rbd.getPhoto();
-
-
-
-              /*  final Handler handler = new Handler();
-                Runnable runnable = new Runnable() {
-                    int i=0;
-                    public void run() {
-
-                        Glide.with(getActivity()).load(rbd.getPhoto()).into(ivLatest);
-                        tvLatest.setText(rbd.getTitle());
-                        //imageView.setImageResource(imageArray[i]);
-                        i++;
-                        if(i>4)
-                        {
-                            i=0;
-                        }
-                        handler.postDelayed(this, 5000);  //for interval...
-                    }
-                };
-              //  handler.postDelayed(runnable, 500); //for initial delay..
-                new Thread(runnable).start();
-            }
-            */
-
-
-
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
+    public void onDestroy()
+    {
+        super.onDestroy();
+        if(latestListener!=null)
+        {
+            dbLatest.removeEventListener(latestListener);
+            latestListener=null;
+        }
     }
 }
+

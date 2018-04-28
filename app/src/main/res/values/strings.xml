@@ -9,11 +9,16 @@
     <string name="closeDrawer">close_drawer</string>
     <string name="URL">URL</string>
     <string name="URL_Text">Link Text(Optional)</string>
+    <string name="post_storyauthor">Enter Writer Name</string>
+    <string name="about_story">Write few lines about story</string>
+    <string name="story_teller_hinter"> Enter Story teller name</string>
 
     <!-- Navigation Drawer menu labels -->
     <string name="nav_home">Home</string>
     <string name="nav_fav">Favorites</string>
     <string name="nav_drafts">drafts</string>
+    <string name="audio_opt1">दिल की गली से</string>
+    <string name="audio_opt2">जनहित पर भारी</string>
 
 
     <string name="nav_published">published</string>
@@ -201,6 +206,7 @@ for India, Govt of India) द्वारा 2012 में हुआ था. �
     <string name="share_button">share article</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
+    <string name="post_photo_hint">Give your photo a story</string>
 
 
 </resources>

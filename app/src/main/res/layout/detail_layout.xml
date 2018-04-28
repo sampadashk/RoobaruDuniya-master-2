@@ -20,6 +20,7 @@
             app:contentScrim="?attr/colorPrimary"
 
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
+
             app:expandedTitleMarginEnd="48dp"
             app:expandedTitleMarginStart="16dp"
             app:expandedTitleMarginBottom="16dp"

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:layout_alignParentBottom="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal">
+    <android.support.design.widget.TabLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="?attr/colorPrimary"
+        android:id="@+id/tabs"
+        app:tabMode="fixed"
+        android:elevation="6dp"
+        app:tabTextColor="#d3d3d3"
+        app:tabSelectedTextColor="#ffffff"
+        app:tabIndicatorColor="#ff00ff"
+        >
+
+    </android.support.design.widget.TabLayout>
+
+</RelativeLayout>

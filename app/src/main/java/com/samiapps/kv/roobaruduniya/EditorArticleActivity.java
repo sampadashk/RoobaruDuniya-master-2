@@ -100,7 +100,7 @@ public class EditorArticleActivity extends AppCompatActivity implements AdapterV
         storageReference = firebaseStorage.getReference().child("article_photo");
         category = db.getReference("categories");
 
-        defaultPhoto = firebaseStorage.getReference().child("default");
+        defaultPhoto = firebaseStorage.getReference().child("defaultpp");
         italicButton = (Button) findViewById(R.id.italic_button);
         boldButton = (Button) findViewById(R.id.bold_button);
         bulletButton = (ImageButton) findViewById(R.id.add_bullet);

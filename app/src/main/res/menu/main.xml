@@ -19,6 +19,25 @@
         android:icon="@drawable/ic_action_border_color" />
 
 
+    <item
+        android:id="@+id/upload_audio"
+        android:title="upload_audio"
+
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/upload_photos"
+        android:title="upload_photo"
+        app:showAsAction="never"
+        />
+
+    <item
+        android:id="@+id/contact_us"
+        android:title="Contact Us"
+        app:showAsAction="never"/>
+
+
+
 
     <!-- Settings, should always be in the overflow -->
     <item

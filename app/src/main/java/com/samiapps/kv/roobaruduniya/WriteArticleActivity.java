@@ -1,6 +1,7 @@
 package com.samiapps.kv.roobaruduniya;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -34,6 +36,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -43,6 +46,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -70,6 +74,8 @@ public class WriteArticleActivity extends AppCompatActivity implements AdapterVi
     DatabaseReference dbtitlepublished;
     int it;
     DatabaseReference category;
+    ProgressDialog progressDialog;
+
 
 
 
@@ -84,7 +90,7 @@ public class WriteArticleActivity extends AppCompatActivity implements AdapterVi
 
     int draftPressed = 0;
     String userEmail;
-    String uStatus;
+   static String uStatus;
     private FirebaseStorage firebaseStorage;
     private StorageReference storageReference;
     EditText title;
@@ -98,6 +104,7 @@ public class WriteArticleActivity extends AppCompatActivity implements AdapterVi
     String userProfile;
     Uri downloadProfileUrl;
     private StorageReference defaultPhoto;
+    StorageReference audioReference;
 
     LinearLayout llout;
     Button italicButton;
@@ -118,6 +125,7 @@ public class WriteArticleActivity extends AppCompatActivity implements AdapterVi
     public static final String PREFS_KEY = "AOP_PREFS_String";
 
     private static final int RC_PHOTO_PICKER = 2;
+    private static final int RC_AUDIO_PICKER = 3;
     private ValueEventListener eventListener;
     final HashMap<String, Object> userMap = new HashMap<String, Object>();
     private Button boldButton;
@@ -130,6 +138,7 @@ public class WriteArticleActivity extends AppCompatActivity implements AdapterVi
         setContentView(R.layout.write_article);
         SharedPreferences settings;
         boolean res;
+
         settings = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE); //1
 
         res = settings.getBoolean(PREFS_KEY, false); //2
@@ -180,10 +189,14 @@ public class WriteArticleActivity extends AppCompatActivity implements AdapterVi
       uStatus = TrialActivity.userStatus;
 
        Log.d("TrialOnStatus", uStatus);
+       // Log.d("checkuname",GlobalProvider.getInstance().name);
         firebaseStorage = FirebaseStorage.getInstance();
         defaultPhoto = firebaseStorage.getReference().child("default");
-        //userPos = "Blogger";
-        userPos = TrialActivity.userStatus;
+        SharedPreferences sp= getSharedPreferences("Status",Context.MODE_PRIVATE);
+
+        userPos=sp.getString("userStatus","Blogger");;
+
+        Log.d("userPos",userPos);
 
 
         try {
@@ -192,7 +205,7 @@ public class WriteArticleActivity extends AppCompatActivity implements AdapterVi
             e.printStackTrace();
         }
         if (userProfile == null) {
-            String add = "firebasestorage.googleapis.com/v0/b/roobaru-duniya-86f7d.appspot.com/o/default-profilepic%2Fdefaultprof.jpg?alt=media&token=aeca7a55-05e4-4c02-938f-061624f5c8b4";
+            String add = "firebasestorage.googleapis.com/v0/b/roobaru-duniya-86f7d.appspot.com/o/defaultpp-profilepic%2Fdefaultprof.jpg?alt=media&token=aeca7a55-05e4-4c02-938f-061624f5c8b4";
             userProfile = Uri.parse("https://" + add).toString();
         }
 
@@ -208,6 +221,7 @@ public class WriteArticleActivity extends AppCompatActivity implements AdapterVi
         dbtitlepublished = db.getReference("publishedTitle");
         firebaseStorage = FirebaseStorage.getInstance();
         storageReference = firebaseStorage.getReference().child("article_photo");
+        audioReference=firebaseStorage.getReference().child("audio");
         //  FirebaseDatabase.getInstance().setLogLevel(Logger.Level.DEBUG);
         title = (EditText) findViewById(R.id.post_title_edit);
         content = (EditText) findViewById(R.id.post_content);
@@ -267,6 +281,7 @@ public class WriteArticleActivity extends AppCompatActivity implements AdapterVi
         });
 
 
+
     }
 
     public Dialog onCreateDialog() {
@@ -314,7 +329,7 @@ public class WriteArticleActivity extends AppCompatActivity implements AdapterVi
                             }
                         }
                         if (downloadProfileUrl == null) {
-                            String add = "firebasestorage.googleapis.com/v0/b/roobaru-duniya-86f7d.appspot.com/o/default-profilepic%2Fdefaultprof.jpg?alt=media&token=aeca7a55-05e4-4c02-938f-061624f5c8b4";
+                            String add = "firebasestorage.googleapis.com/v0/b/roobaru-duniya-86f7d.appspot.com/o/defaultpp-profilepic%2Fdefaultprof.jpg?alt=media&token=aeca7a55-05e4-4c02-938f-061624f5c8b4";
                             Uri defaultuserpicUrl = Uri.parse("https://" + add);
                             rbd.setUserProfilePhoto(defaultuserpicUrl.toString());
                         }
@@ -334,7 +349,7 @@ public class WriteArticleActivity extends AppCompatActivity implements AdapterVi
         //   Log.d("TrialOnStat", uStatus);
 
         try {
-            if (uStatus.equals("editor")) {
+            if (userPos.equals("editor")) {
                 spinner.setVisibility(View.VISIBLE);
                 adapter = ArrayAdapter.createFromResource(this,
                         R.array.catgs, android.R.layout.simple_spinner_item);
@@ -709,6 +724,7 @@ public class WriteArticleActivity extends AppCompatActivity implements AdapterVi
                 if (userPos.equals("editor")) {
 
                     //TODO: publish editor
+                    Log.d("editoris","yes");
                     //select photo from storage and put in rbd object and firebase database
                     if (rbd.getPhoto() == null) {
                         String add = "https://firebasestorage.googleapis.com/v0/b/roobaru-duniya-86f7d.appspot.com/o/article_photo%2F2943?alt=media&token=14bb10c1-ddc8-4ac2-b425-4a862721ecd2";
@@ -751,7 +767,7 @@ public class WriteArticleActivity extends AppCompatActivity implements AdapterVi
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             if(!dataSnapshot.exists())
                             {
-                                User u=new User(user.getDisplayName(),userEmail,null,uStatus,userProfile);
+                                User u=new User(user.getDisplayName(),userEmail,null,userPos,userProfile);
                                 dbRefUser.child(userId).setValue(u);
 
                             }
@@ -838,16 +854,34 @@ public class WriteArticleActivity extends AppCompatActivity implements AdapterVi
     public void onActivityResult(int requestcode, int resultcode, Intent data) {
 
         if (requestcode == RC_PHOTO_PICKER && resultcode == RESULT_OK) {
+            progressDialog=new ProgressDialog(WriteArticleActivity.this);
+            progressDialog.setMax(100);
+            progressDialog.setMessage("Uploading...");
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            progressDialog.show();
+            progressDialog.setCancelable(false);
 
             final Uri SelectedImageUri = data.getData();
             Toast.makeText(this, R.string.wait_photo, Toast.LENGTH_LONG).show();
 
             StorageReference photoref = storageReference.child(SelectedImageUri.getLastPathSegment());
-            photoref.putFile(SelectedImageUri).addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            photoref.putFile(SelectedImageUri).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+
+
+
+                    double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                    //sets and increments value of progressbar
+                    progressDialog.incrementProgressBy((int) progress);
+
+                }
+            }).addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
 
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                    progressDialog.dismiss();
 
                     try {
                         if (rbd != null) {
@@ -864,6 +898,12 @@ public class WriteArticleActivity extends AppCompatActivity implements AdapterVi
 
                     //  publishButton.setEnabled(true);
 
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    progressDialog.dismiss();
+                    Toast.makeText(WriteArticleActivity.this,"Upload Failed",Toast.LENGTH_LONG).show();
                 }
             });
 
@@ -883,6 +923,23 @@ public class WriteArticleActivity extends AppCompatActivity implements AdapterVi
             final Uri SelectedProfileUri = data.getData();
             StorageReference picref = storageReference.child(SelectedProfileUri.getLastPathSegment());
             picref.putFile(SelectedProfileUri).addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
+
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    downloadProfileUrl = taskSnapshot.getDownloadUrl();
+                }
+
+
+            });
+
+
+            Toast.makeText(this, R.string.photo_uploaded, Toast.LENGTH_LONG).show();
+        }
+        else if (requestcode == RC_AUDIO_PICKER && resultcode == RESULT_OK)
+        {
+            Uri uri = data.getData();
+            StorageReference audref = audioReference.child(uri.getLastPathSegment());
+            audref.putFile(uri).addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
 
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {

@@ -4,13 +4,13 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -20,6 +20,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -84,7 +85,7 @@ public class TrialActivity extends AppCompatActivity
     private static final String TAG_SENT = "sent";
     public static String CURRENT_TAG = TAG_HOME;
     public static boolean shouldLoadHomeFragOnBackPress;
-    FloatingActionButton fab;
+
     public static boolean isEditor;
     FirebaseDatabase firebaseDtabase;
     DatabaseReference userDtabase;
@@ -95,6 +96,7 @@ public class TrialActivity extends AppCompatActivity
     private BroadcastReceiver mReceiver;
 
     private JSONObject json_object;
+
 
 
     @Override
@@ -162,16 +164,6 @@ public class TrialActivity extends AppCompatActivity
         activityTitles = getResources().getStringArray(R.array.nav_item_activity_titles);
 
 
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        //send email to roobaru.duniya@gmail.com
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String email = "roobaru.duniya@gmail.com";
-                Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + email));
-                startActivity(Intent.createChooser(intent, "Send Email"));
-            }
-        });
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(
@@ -224,6 +216,9 @@ public class TrialActivity extends AppCompatActivity
                         txtStatus.setText(R.string.editor);
                         userDtabase.child(mAuth.getCurrentUser().getUid()).child("status").setValue("editor");
 
+
+
+
                         break;
 
                     }
@@ -247,15 +242,24 @@ public class TrialActivity extends AppCompatActivity
 
 
     private void loadNavHeader() {
+
+        SharedPreferences sp= getSharedPreferences("Status",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sp.edit();
+        editor.putString("userStatus",userStatus);
+        editor.commit();
+
+
         // name, website
 
         // loading header background image
 
 
         // Loading profile image
+       // User ut=new User(uname, uemail,userStatus,photoUri.toString());
+       // RoobaruGlobaLProvider.getUserRoobaru(ut);
         txtStatus.setText(userStatus);
         if (photoUri == null) {
-            String add = "firebasestorage.googleapis.com/v0/b/roobaru-duniya-86f7d.appspot.com/o/default-profilepic%2Fdefaultprof.jpg?alt=media&token=aeca7a55-05e4-4c02-938f-061624f5c8b4";
+            String add = "firebasestorage.googleapis.com/v0/b/roobaru-duniya-86f7d.appspot.com/o/defaultpp-profilepic%2Fdefaultprof.jpg?alt=media&token=aeca7a55-05e4-4c02-938f-061624f5c8b4";
             photoUri = Uri.parse("https://" + add);
 
 
@@ -306,6 +310,7 @@ public class TrialActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+        Log.d("menucheck","menucheck");
 
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main, menu);
@@ -371,9 +376,41 @@ public class TrialActivity extends AppCompatActivity
                 break;
 
             }
-            case R.id.action_settings: {
-                AuthUI.getInstance().signOut(this);
+            case R.id.upload_audio: {
+                if (uemail != null) {
+
+                    Log.d("audiochec", "audiochec");
+                    Intent intent = new Intent(TrialActivity.this, UploadAudio.class);
+                    startActivity(intent);
+
+
+                    break;
+
+                }
+            }
+            case R.id.upload_photos:
+            {
+                Intent intent = new Intent(TrialActivity.this, UploadPhoto.class);
+                startActivity(intent);
+
+
                 break;
+            }
+
+            case R.id.action_settings: {
+                //TODO change
+
+                AuthUI.getInstance().signOut(this);
+
+
+                break;
+            }
+            case R.id.contact_us:
+            {
+
+                String email = "roobaru.duniya@gmail.com";
+                Intent intt = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + email));
+                startActivity(Intent.createChooser(intt, "Send Email"));
             }
 
 
@@ -453,7 +490,7 @@ public class TrialActivity extends AppCompatActivity
             drawer.closeDrawers();
 
             // show or hide the fab button
-            toggleFab();
+
             return;
         }
         // Sometimes, when fragment has huge data, screen seems hanging
@@ -480,7 +517,7 @@ public class TrialActivity extends AppCompatActivity
         }
 
         // show or hide the fab button
-        toggleFab();
+
 
         //Closing drawer on item click
         drawer.closeDrawers();
@@ -568,6 +605,9 @@ public class TrialActivity extends AppCompatActivity
             uemail = email;
 
 
+
+
+
             mHandler = new Handler();
 
             //Log.d("cname", uname);
@@ -647,19 +687,15 @@ public class TrialActivity extends AppCompatActivity
 
     }
 
-    private void toggleFab() {
-        if (navItemIndex == 0)
-            fab.show();
-        else
-            fab.hide();
-    }
+
 
     private Fragment getHomeFragment() {
         //Log.d(TAG, "GETFrag");
         switch (navItemIndex) {
             case 0:
                 // home
-                MainPage homeFragment = new MainPage();
+                //MainPage homeFragment = new MainPage();
+                showAudioActivity homeFragment=new showAudioActivity();
                 return homeFragment;
             case 1:
                 // fav
@@ -682,7 +718,7 @@ public class TrialActivity extends AppCompatActivity
 
 
             default:
-                return new MainPage();
+                return new showAudioActivity();
         }
 
     }

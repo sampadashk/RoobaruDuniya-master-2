@@ -32,8 +32,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         String notificatication_type = remoteMessage.getData().get("title");
         String msgTitle = remoteMessage.getData().get("body");
         String user = remoteMessage.getData().get("userName");
+        String teller=remoteMessage.getData().get("userteller");
+        String photoloader=remoteMessage.getData().get("photoid");
         String notification_body;
-        String notification_title;
+        String notification_title=null;
 
         if (user != null) {
             notification_body = "New " + notificatication_type + " on your article " + msgTitle + " by " + user;
@@ -41,8 +43,22 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
 
         } else {
-            notification_body = notificatication_type + " " + msgTitle;
-            notification_title = "New Article";
+
+            if(teller!=null)
+            {
+                notification_body = notificatication_type + " " + msgTitle;
+                notification_title="New Audio";
+            }
+            else if(photoloader!=null)
+            {
+                notification_body = notificatication_type + " " + msgTitle;
+                notification_title = "New Photo";
+            }
+
+            else {
+                notification_body = notificatication_type + " " + msgTitle;
+                notification_title = "New Article";
+            }
         }
 
 
@@ -50,7 +66,20 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         //TODO new article notification
         // String click_action = remoteMessage.getNotification().getClickAction();
         String mid = remoteMessage.getData().get("msgid");
-        String uid = remoteMessage.getData().get("userid");
+        Log.d("checkmid",mid);
+        String uid;
+
+        if(teller!=null)
+        {
+             uid = remoteMessage.getData().get("userteller");
+        }
+
+        else if(photoloader!=null)
+        {
+            uid=remoteMessage.getData().get("photoid");
+        }
+        else
+       uid = remoteMessage.getData().get("userid");
         Map<String, String> params = new HashMap<String, String>();
         //params = remoteMessage.getData().get("msgid"),remoteMessage.getData().get("userid");
         params.put("msgid", mid);
@@ -69,11 +98,30 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                         .setContentTitle(notification_title)
                         .setContentText(notification_body)
                         .setAutoCancel(true);
+        //TODO CHANGED HERE INTENT
+        Intent resultIntent;
+        if(teller==null&&photoloader==null) {
 
-        Intent resultIntent = new Intent(this, ArticleDetail.class);
-        resultIntent.setAction(Long.toString(System.currentTimeMillis()));
-        // Log.d("getAction",click_action);
-        resultIntent.putExtra("bkgnotification", object.toString());
+             resultIntent = new Intent(this, ArticleDetail.class);
+            resultIntent.setAction(Long.toString(System.currentTimeMillis()));
+            // Log.d("getAction",click_action);
+            resultIntent.putExtra("bkgnotification", object.toString());
+        }
+        else if(photoloader!=null)
+        {
+
+            resultIntent = new Intent(this, DisplayPhoto.class);
+            resultIntent.setAction(Long.toString(System.currentTimeMillis()));
+            // Log.d("getAction",click_action);
+            resultIntent.putExtra("bkgnotification", object.toString());
+        }
+        else
+        {
+            resultIntent = new Intent(this, PlayAudioActivity.class);
+            resultIntent.setAction(Long.toString(System.currentTimeMillis()));
+            // Log.d("getAction",click_action);
+            resultIntent.putExtra("bkgnotification", object.toString());
+        }
         //  resultIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
 // Because clicking the notification opens a new ("special") activity, there's

@@ -71,7 +71,13 @@ public class SentFragment extends Fragment {
         msgReference = firebaseDtabase.getReference().child("messages");
         pendingRef = firebaseDtabase.getReference().child("pending");
         keyList = new ArrayList<>();
-        uStatus = TrialActivity.userStatus;
+       // SharedPreferences sp= getActivity().getSharedPreferences("Status", Context.MODE_PRIVATE);
+
+       // String status=sp.getString("userStatus",userStatus);
+
+        //uStatus = status;
+        uStatus=TrialActivity.userStatus;
+        Log.d("checkstatus",uStatus);
 
 
         //  Log.d("checkt", dbaseReference.toString());
