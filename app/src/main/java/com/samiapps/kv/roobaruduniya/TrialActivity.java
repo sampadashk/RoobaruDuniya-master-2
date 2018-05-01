@@ -61,6 +61,7 @@ public class TrialActivity extends AppCompatActivity
     private static final int RC_SIGN_IN = 123;
     Uri photoUri;
     Toast t;
+    String path;
     private View navHeader;
 
     public static String[] activityTitles;
@@ -96,6 +97,8 @@ public class TrialActivity extends AppCompatActivity
     private BroadcastReceiver mReceiver;
 
     private JSONObject json_object;
+    SharedPreferences sp;
+    //String defaultPhoto;
 
 
 
@@ -114,6 +117,7 @@ public class TrialActivity extends AppCompatActivity
         shouldLoadHomeFragOnBackPress = true;
         navItemIndex = 0;
         CURRENT_TAG = TAG_HOME;
+        sp= getApplicationContext().getSharedPreferences("Status",Context.MODE_PRIVATE);
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -123,7 +127,9 @@ public class TrialActivity extends AppCompatActivity
                 FirebaseUser user = firebaseAuth.getCurrentUser();
 
 
+
                 if (user != null) {
+
 
 
                     //  Log.d(TAG, "Signed in 3");
@@ -216,6 +222,11 @@ public class TrialActivity extends AppCompatActivity
                         txtStatus.setText(R.string.editor);
                         userDtabase.child(mAuth.getCurrentUser().getUid()).child("status").setValue("editor");
 
+                        SharedPreferences.Editor editor=sp.edit();
+                        editor.putString("userStatus",userStatus);
+                        editor.apply();
+                        invalidateOptionsMenu();
+
 
 
 
@@ -243,10 +254,7 @@ public class TrialActivity extends AppCompatActivity
 
     private void loadNavHeader() {
 
-        SharedPreferences sp= getSharedPreferences("Status",Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor=sp.edit();
-        editor.putString("userStatus",userStatus);
-        editor.commit();
+
 
 
         // name, website
@@ -258,23 +266,40 @@ public class TrialActivity extends AppCompatActivity
        // User ut=new User(uname, uemail,userStatus,photoUri.toString());
        // RoobaruGlobaLProvider.getUserRoobaru(ut);
         txtStatus.setText(userStatus);
-        if (photoUri == null) {
-            String add = "firebasestorage.googleapis.com/v0/b/roobaru-duniya-86f7d.appspot.com/o/defaultpp-profilepic%2Fdefaultprof.jpg?alt=media&token=aeca7a55-05e4-4c02-938f-061624f5c8b4";
-            photoUri = Uri.parse("https://" + add);
+        Log.d("chpj",photoUri+"");
 
 
-        }
-        if (photoUri != null) {
-            Glide.with(this).load(photoUri)
-                    .crossFade()
-                    .thumbnail(0.5f)
-                    .bitmapTransform(new CircleTransform(this))
+
+
+               /* Glide.with(this).load(photoUri)
+                        .crossFade()
+                        .thumbnail(0.5f)
+                        .bitmapTransform(new CircleTransform(this))
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(imgProfile);
+                        */
+
+
+            Glide
+                    .with(this)
+                    .load(photoUri)
+                    .crossFade().thumbnail(0.5f). bitmapTransform(new CircleTransform(this))
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
+
+                    .error(R.drawable.defaultprofile)
                     .into(imgProfile);
-        }
+
+
+
         txtName.setText(uname);
 
 
+    }
+    public int getImage(String imageName) {
+
+        int drawableResourceId = this.getResources().getIdentifier(imageName, "drawable", this.getPackageName());
+
+        return drawableResourceId;
     }
 
 
@@ -310,10 +335,21 @@ public class TrialActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        Log.d("menucheck","menucheck");
 
-        MenuInflater inflater = getMenuInflater();
+
+        MenuInflater inflater =getMenuInflater();
         inflater.inflate(R.menu.main, menu);
+        if(!isEditor)
+        {
+            MenuItem item = menu.findItem(R.id.upload_audio);
+            MenuItem item1=menu.findItem(R.id.upload_photos);
+
+
+            item.setVisible(false);
+            item1.setVisible(false);
+
+        }
+
 
 
 
@@ -379,9 +415,12 @@ public class TrialActivity extends AppCompatActivity
             case R.id.upload_audio: {
                 if (uemail != null) {
 
-                    Log.d("audiochec", "audiochec");
-                    Intent intent = new Intent(TrialActivity.this, UploadAudio.class);
-                    startActivity(intent);
+                    if(isEditor) {
+
+
+                        Intent intent = new Intent(TrialActivity.this, UploadAudio.class);
+                        startActivity(intent);
+                    }
 
 
                     break;
@@ -390,8 +429,10 @@ public class TrialActivity extends AppCompatActivity
             }
             case R.id.upload_photos:
             {
-                Intent intent = new Intent(TrialActivity.this, UploadPhoto.class);
-                startActivity(intent);
+                if(isEditor) {
+                    Intent intent = new Intent(TrialActivity.this, UploadPhoto.class);
+                    startActivity(intent);
+                }
 
 
                 break;
@@ -399,8 +440,14 @@ public class TrialActivity extends AppCompatActivity
 
             case R.id.action_settings: {
                 //TODO change
+                isEditor=false;
+                SharedPreferences.Editor editor=sp.edit();
+                editor.putString("userStatus","Blogger");
+                editor.apply();
+
 
                 AuthUI.getInstance().signOut(this);
+
 
 
                 break;

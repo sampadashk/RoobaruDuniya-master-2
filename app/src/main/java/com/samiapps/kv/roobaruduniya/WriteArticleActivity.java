@@ -1,5 +1,6 @@
 package com.samiapps.kv.roobaruduniya;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -26,6 +27,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -192,11 +194,7 @@ public class WriteArticleActivity extends AppCompatActivity implements AdapterVi
        // Log.d("checkuname",GlobalProvider.getInstance().name);
         firebaseStorage = FirebaseStorage.getInstance();
         defaultPhoto = firebaseStorage.getReference().child("default");
-        SharedPreferences sp= getSharedPreferences("Status",Context.MODE_PRIVATE);
 
-        userPos=sp.getString("userStatus","Blogger");;
-
-        Log.d("userPos",userPos);
 
 
         try {
@@ -225,6 +223,9 @@ public class WriteArticleActivity extends AppCompatActivity implements AdapterVi
         //  FirebaseDatabase.getInstance().setLogLevel(Logger.Level.DEBUG);
         title = (EditText) findViewById(R.id.post_title_edit);
         content = (EditText) findViewById(R.id.post_content);
+        photoButton = (ImageButton) findViewById(R.id.photoPickerButton);
+        writerDetail = (Button) findViewById(R.id.writer_detail);
+        photoButton.setEnabled(false);
         Intent intent = getIntent();
         try {
             pos = intent.getIntExtra("position", -1);
@@ -260,11 +261,41 @@ public class WriteArticleActivity extends AppCompatActivity implements AdapterVi
             }
         });
         */
+        try {
+            SharedPreferences sp= getApplicationContext().getSharedPreferences("Status",Context.MODE_PRIVATE);
+
+            userPos=sp.getString("userStatus","Blogger");;
+
+            Log.d("userPos",userPos);
+            if (userPos.equals("editor")) {
+                spinner.setVisibility(View.VISIBLE);
+                adapter = ArrayAdapter.createFromResource(this,
+                        R.array.catgs, android.R.layout.simple_spinner_item);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+                spinner.setAdapter(adapter);
+
+                spinner.setOnItemSelectedListener(this);
+                writerDetail.setVisibility(View.VISIBLE);
+                writerDetail.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Dialog d = onCreateDialog();
+                        d.show();
+
+                    }
+                });
+
+                // Log.d("writername", wName);
+            }
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
 
 
-        photoButton = (ImageButton) findViewById(R.id.photoPickerButton);
-        writerDetail = (Button) findViewById(R.id.writer_detail);
-        photoButton.setEnabled(false);
+
+
+
 
         photoButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -348,31 +379,17 @@ public class WriteArticleActivity extends AppCompatActivity implements AdapterVi
     public void onStart() {
         //   Log.d("TrialOnStat", uStatus);
 
-        try {
-            if (userPos.equals("editor")) {
-                spinner.setVisibility(View.VISIBLE);
-                adapter = ArrayAdapter.createFromResource(this,
-                        R.array.catgs, android.R.layout.simple_spinner_item);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
-                spinner.setAdapter(adapter);
 
-                spinner.setOnItemSelectedListener(this);
-                writerDetail.setVisibility(View.VISIBLE);
-                writerDetail.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Dialog d = onCreateDialog();
-                        d.show();
-
-                    }
-                });
-
-                // Log.d("writername", wName);
+        content.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    Log.d("check","false");
+                    hideKeyboard(WriteArticleActivity.this);
+                } else {
+                    showKeyboard(WriteArticleActivity.this);
+                }
             }
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
+        });
 
 
         title.addTextChangedListener(new TextWatcher() {
@@ -953,6 +970,19 @@ public class WriteArticleActivity extends AppCompatActivity implements AdapterVi
             Toast.makeText(this, R.string.photo_uploaded, Toast.LENGTH_LONG).show();
         }
     }
+    public static void showKeyboard(Activity activity) {
+        if (activity != null) {
+            activity.getWindow()
+                    .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
+    }
+
+    public static void hideKeyboard(Activity activity) {
+        if (activity != null) {
+            activity.getWindow()
+                    .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        }
+    }
 
     private void addCategoryDb() {
 
@@ -1019,6 +1049,7 @@ public class WriteArticleActivity extends AppCompatActivity implements AdapterVi
 
 
     }
+
 
 
 }

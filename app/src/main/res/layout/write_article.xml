@@ -65,7 +65,9 @@
                 android:textColorHint="@color/text_secondary"
 
 
-                android:textIsSelectable="true" />
+                android:textIsSelectable="true">
+
+            </EditText>
 
         </ScrollView>
 

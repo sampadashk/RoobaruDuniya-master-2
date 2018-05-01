@@ -1,11 +1,13 @@
 package com.samiapps.kv.roobaruduniya;
 
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -30,6 +32,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         super.onMessageReceived(remoteMessage);
 
         String notificatication_type = remoteMessage.getData().get("title");
+        Log.d("getnot",notificatication_type);
         String msgTitle = remoteMessage.getData().get("body");
         String user = remoteMessage.getData().get("userName");
         String teller=remoteMessage.getData().get("userteller");
@@ -93,7 +96,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
 
         NotificationCompat.Builder mBuilder =
-                new NotificationCompat.Builder(this)
+                new NotificationCompat.Builder(this,"sam")
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setContentTitle(notification_title)
                         .setContentText(notification_body)
@@ -142,6 +145,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 // Gets an instance of the NotificationManager service
         NotificationManager mNotifyMgr =
                 (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("sam",
+                    "Channel human readable title",
+                    NotificationManager.IMPORTANCE_DEFAULT);
+            mNotifyMgr.createNotificationChannel(channel);
+        }
 // Builds the notification and issues it.
         mNotifyMgr.notify(mNotificationId, mBuilder.build());
 

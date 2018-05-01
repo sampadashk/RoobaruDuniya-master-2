@@ -47,7 +47,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         holder.cmnt.setText(commnt);
         holder.dateTextView.setText(date);
         Glide.with(context)
-                .load(imgCommentor)
+                .load(imgCommentor).thumbnail(0.5f).error(R.drawable.defaultprofile)
                 .into(holder.uPhotoView);
         holder.cName.setOnClickListener(new View.OnClickListener() {
             @Override

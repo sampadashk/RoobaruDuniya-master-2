@@ -689,7 +689,7 @@ public class ArticleDetail extends AppCompatActivity {
                     .crossFade()
                     .thumbnail(0.5f)
                     .bitmapTransform(new CircleTransform(this))
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL).error(R.drawable.defaultprofile)
                     .into(imgProfile);
             loadComment();
         }
